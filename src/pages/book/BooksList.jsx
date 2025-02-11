@@ -141,7 +141,7 @@ const BooksList = () => {
           (!authorsFilter || book.authors.includes(authorsFilter)) &&
           (!typesFilter || book.types.includes(typesFilter)) &&
           (!isbnFilter || book.isbn.toString() === isbnFilter) &&
-          (!yearFilter || book.year.toString() === yearFilter)
+          (!yearFilter || book.year == yearFilter)
       )
       .sort((a, b) => {
         const secondNameA = (a.title.split(" ")[1] || "").toUpperCase();
@@ -198,9 +198,11 @@ const BooksList = () => {
           select
           sx={{ width: "130px" }}
         >
-          {authorsFilterOptions.map((author) => (
-            <MenuItem key={author} value={author}>
-              {author}
+          <MenuItem value="">All</MenuItem>
+
+          {getDistinctValues("authors").map((authors) => (
+            <MenuItem key={authors} value={authors}>
+              {authors}
             </MenuItem>
           ))}
         </TextField>
@@ -212,9 +214,10 @@ const BooksList = () => {
           select
           sx={{ width: "130px" }}
         >
-          {typesFilter.map((type) => (
-            <MenuItem key={type} value={type}>
-              {type}
+          <MenuItem value="">All</MenuItem>
+          {getDistinctValues("types").map((types) => (
+            <MenuItem key={types} value={types}>
+              {types}
             </MenuItem>
           ))}
         </TextField>
@@ -227,6 +230,11 @@ const BooksList = () => {
           sx={{ width: "85px" }}
         >
           <MenuItem value="">All</MenuItem>
+          {getDistinctValues("year").map((year) => (
+            <MenuItem key={year} value={year}>
+              {year}
+            </MenuItem>
+          ))}
         </TextField>
 
         <TextField
@@ -237,6 +245,11 @@ const BooksList = () => {
           sx={{ width: "120px" }}
         >
           <MenuItem value="">All</MenuItem>
+          {getDistinctValues("isbn").map((isbn) => (
+            <MenuItem key={isbn} value={isbn}>
+              {isbn}
+            </MenuItem>
+          ))}
         </TextField>
         <BookPDFButton getFilteredBooks={getFilteredBooks} />
       </Container>
