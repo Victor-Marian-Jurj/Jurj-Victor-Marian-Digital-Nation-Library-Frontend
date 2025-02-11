@@ -21,11 +21,11 @@ const CreateBook = () => {
   const dispatch = useDispatch();
 
   const handleCancelClick = () => {
-    navigate("/book.manager/books");
+    navigate("/biblioteca.admin/books");
   };
 
   const handleSaveClick = () => {
-    navigate("/book.manager/books");
+    navigate("/biblioteca.admin/books");
   };
   const handleAddBook = async (
     isbn,
@@ -36,12 +36,12 @@ const CreateBook = () => {
     description
   ) => {
     const book = {
-      isbn: isbn,
-      authors: authors,
-      title: title,
-      types: types,
-      year: year,
-      description: description,
+      isbn: String(isbn),
+      authors: String(authors),
+      title: String(title),
+      types: String(types),
+      year: parseInt(year, 10),
+      description: String(description),
     };
 
     try {
@@ -50,7 +50,7 @@ const CreateBook = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      navigate("/book.manager/books");
+      navigate("/biblioteca.admin/books");
     }
   };
 
