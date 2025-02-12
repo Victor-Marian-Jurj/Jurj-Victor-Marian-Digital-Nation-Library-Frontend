@@ -29,7 +29,8 @@ const BooksList = () => {
   const [yearFilter, setYearFilter] = useState("");
   const [isbnFilter, setIsbnFilter] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]); // State variable to hold filtered Book data
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchCriteria, setSearchCriteria] = useState("title");
   //
 
   const updateAuthorsFilterOptions = () => {
@@ -46,8 +47,15 @@ const BooksList = () => {
     try {
       const response = await getBooks();
       const booksData = response.book;
-      setBooks(booksData);
+      // Sort books alphabetically by title
+      const sortedBooks = booksData.sort((a, b) => {
+        const titleA = a.title.toLowerCase();
+        const titleB = b.title.toLowerCase();
+        return titleA.localeCompare(titleB);
+      });
 
+      setBooks(sortedBooks);
+      setFilteredBooks(sortedBooks);
       // Update rating and name filter options after fetching Book data
       updateAuthorsFilterOptions();
       updateTypesFilterOptions();
@@ -85,6 +93,21 @@ const BooksList = () => {
   };
 
   //
+
+  useEffect(() => {
+    const filtered = books.filter((book) =>
+      book[searchCriteria].toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    /// Sort filtered books alphabetically by title
+    const sortedFilteredBooks = filtered.sort((a, b) => {
+      const titleA = a.title.toLowerCase();
+      const titleB = b.title.toLowerCase();
+      return titleA.localeCompare(titleB);
+    });
+
+    setFilteredBooks(sortedFilteredBooks);
+  }, [searchTerm, searchCriteria, books]);
 
   useEffect(() => {
     if (titleFilter !== "") {
@@ -144,9 +167,9 @@ const BooksList = () => {
           (!yearFilter || book.year == yearFilter)
       )
       .sort((a, b) => {
-        const secondNameA = (a.title.split(" ")[1] || "").toUpperCase();
-        const secondNameB = (b.title.split(" ")[1] || "").toUpperCase();
-        return secondNameA.localeCompare(secondNameB);
+        const titleA = a.title.toLowerCase();
+        const titleB = b.title.toLowerCase();
+        return titleA.localeCompare(titleB);
       });
   };
 
@@ -173,7 +196,7 @@ const BooksList = () => {
   return (
     <div>
       <Typography variant="h5" sx={{ color: "#3f51b5" }}>
-        Filter books
+        Filtreaza carte
       </Typography>
       <Container sx={{ backgroundColor: "white", color: "black" }}>
         <TextField
@@ -190,7 +213,6 @@ const BooksList = () => {
             </MenuItem>
           ))}
         </TextField>
-
         <TextField
           label="Autori"
           value={authorsFilter}
@@ -206,7 +228,6 @@ const BooksList = () => {
             </MenuItem>
           ))}
         </TextField>
-
         <TextField
           label="Tip carte"
           value={typesFilter}
@@ -221,7 +242,6 @@ const BooksList = () => {
             </MenuItem>
           ))}
         </TextField>
-
         <TextField
           label="An"
           value={yearFilter}
@@ -236,7 +256,6 @@ const BooksList = () => {
             </MenuItem>
           ))}
         </TextField>
-
         <TextField
           label="Cod ISBN"
           value={isbnFilter}
@@ -252,25 +271,48 @@ const BooksList = () => {
           ))}
         </TextField>
         <BookPDFButton getFilteredBooks={getFilteredBooks} />
+        {/*  */}
+        <div>
+          <Typography variant="h5" sx={{ color: "#3f51b5", mb: 2 }}>
+            Cauta carte
+          </Typography>
+          <Container>
+            <TextField
+              select
+              label="Cauta dupa"
+              value={searchCriteria}
+              onChange={(e) => setSearchCriteria(e.target.value)}
+              sx={{ width: "100px" }}
+            >
+              <MenuItem value="title">Titlu</MenuItem>
+              <MenuItem value="authors">Autor</MenuItem>
+              <MenuItem value="types">Tip</MenuItem>
+            </TextField>
+            <TextField
+              label={`Search by ${searchCriteria}`}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              sx={{ width: "300px" }}
+            />
+          </Container>
+        </div>
+        {/*  */}
       </Container>
 
       <Divider
-        sx={{
-          backgroundColor: "#3f51b5",
-          height: "2px",
-          marginTop: "10px",
-          marginBottom: "25px",
-        }}
+        sx={{ backgroundColor: "#3f51b5", height: "2px", marginY: "20px" }}
       />
       <Stack direction="row" sx={{ flexWrap: "wrap", gap: "4rem" }}>
         {books.length === 0 ? (
           <Box className="center-flex-container">
             <CircularProgress />
           </Box>
-        ) : (
-          getFilteredBooks().map((book) => (
+        ) : filteredBooks.length > 0 ? (
+          filteredBooks.map((book) => (
             <BookItem book={book} key={book.isbn} onGetBooks={fetchBookData} />
           ))
+        ) : (
+          <Typography>No books found.</Typography>
         )}
       </Stack>
     </div>
