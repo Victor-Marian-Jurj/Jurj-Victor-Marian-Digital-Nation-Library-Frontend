@@ -131,7 +131,7 @@ const MyDocument = ({ data, generatedOn }) => (
   </Document>
 );
 
-const BookPDFButton = ({ getFilteredBooks }) => {
+const BookPDFButtonUser = ({ getFilteredBooks }) => {
   const handleGeneratePDF = () => {
     const generatedOn = formatDateTime(new Date());
     const pdfContent = (
@@ -169,4 +169,4 @@ const BookPDFButton = ({ getFilteredBooks }) => {
   );
 };
 
-export default BookPDFButton;
+export default BookPDFButtonUser;

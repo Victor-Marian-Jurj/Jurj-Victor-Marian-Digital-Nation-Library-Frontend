@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import BookItem from "./BookItem";
-import "../../styles/BooksList.css";
-import { getBooks as getBooks } from "../../service/BookService";
+import BookItemUser from "./BookItemUser";
+import "../../../styles/BooksList.css";
+import { getBooks as getBooks } from "../../../service/BookService";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import BookPDFButton from "./BookPDFButton"; // Import GeneratePDFButton component
+import BookPDFButton from "./BookPDFButtonUser"; // Import GeneratePDFButton component
 import { styled } from "@mui/system"; // Import styled from @mui/system or @mui/material/styles
 
 const Container = styled("div")({
@@ -20,7 +20,7 @@ const Container = styled("div")({
   marginBottom: "20px", // Add bottom margin for separation
 });
 
-const BooksList = () => {
+const BooksListUser = () => {
   const [authorsFilterOptions, setAuthorsFilterOptions] = useState([""]);
   const [books, setBooks] = useState([]);
   const [authorsFilter, setAuthorsFilter] = useState("");
@@ -309,7 +309,11 @@ const BooksList = () => {
           </Box>
         ) : filteredBooks.length > 0 ? (
           filteredBooks.map((book) => (
-            <BookItem book={book} key={book.isbn} onGetBooks={fetchBookData} />
+            <BookItemUser
+              book={book}
+              key={book.isbn}
+              onGetBooks={fetchBookData}
+            />
           ))
         ) : (
           <Typography>No books found.</Typography>
@@ -318,4 +322,4 @@ const BooksList = () => {
     </div>
   );
 };
-export default BooksList;
+export default BooksListUser;

@@ -15,6 +15,7 @@ const AppHeader = ({ width, onDrawerToggle }) => {
         ml: {
           sm: `${width}px`,
         },
+        backgroundColor: "#1C7343",
       }}
     >
       <Toolbar>

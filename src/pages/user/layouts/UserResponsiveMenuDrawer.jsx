@@ -5,10 +5,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import AvatarLibrary from "../components/AvatarLibrary";
-import AddIcon from "@mui/icons-material/Add";
+import UserAvatar from "../layouts/UserAvatar";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import { Link } from "react-router-dom";
 
@@ -17,7 +15,7 @@ const ResponsiveMenuDrawer = () => {
     {
       text: "Carti disponibile",
       icon: AutoStoriesIcon,
-      path: "/biblioteca.admin/books",
+      path: "/biblioteca/books",
     },
   ];
 
@@ -30,9 +28,9 @@ const ResponsiveMenuDrawer = () => {
       <List>
         <ListItem>
           <ListItemAvatar>
-            <AvatarLibrary />
+            <UserAvatar />
           </ListItemAvatar>
-          <ListItemText primary="Admin" />
+          <ListItemText primary="User" />
         </ListItem>
       </List>
       <Divider />
@@ -67,26 +65,6 @@ const ResponsiveMenuDrawer = () => {
       </List>
 
       <Divider />
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          mt: "16px",
-        }}
-      >
-        <Link to="/biblioteca.admin/books/create">
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            sx={{
-              backgroundColor: "#1C7343",
-            }}
-          >
-            Adaugare carte noua
-          </Button>
-        </Link>
-      </Box>
       <Box sx={{ mt: "60px" }}>
         <img
           src="/images/logo.jpg"
