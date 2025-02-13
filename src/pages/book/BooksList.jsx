@@ -284,9 +284,9 @@ const BooksList = () => {
               onChange={(e) => setSearchCriteria(e.target.value)}
               sx={{ width: "100px" }}
             >
-              <MenuItem value="title">Titlu</MenuItem>
-              <MenuItem value="authors">Autor</MenuItem>
-              <MenuItem value="types">Tip</MenuItem>
+              <MenuItem value="title">Titlul</MenuItem>
+              <MenuItem value="authors">Autori</MenuItem>
+              <MenuItem value="types">Tip carte</MenuItem>
             </TextField>
             <TextField
               label={`Search by ${searchCriteria}`}
