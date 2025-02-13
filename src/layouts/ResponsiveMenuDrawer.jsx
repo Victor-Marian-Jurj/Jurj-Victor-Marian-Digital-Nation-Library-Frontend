@@ -75,10 +75,23 @@ const ResponsiveMenuDrawer = () => {
         }}
       >
         <Link to="/biblioteca.admin/books/create">
-          <Button variant="contained" startIcon={<AddIcon />}>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            sx={{
+              backgroundColor: "#1C7343",
+            }}
+          >
             Adaugare carte noua
           </Button>
         </Link>
+      </Box>
+      <Box sx={{ mt: "60px" }}>
+        <img
+          src="/images/logo.jpg"
+          alt="Logo"
+          style={{ width: "100%", maxWidth: "300px", height: "auto" }}
+        />
       </Box>
     </div>
   );

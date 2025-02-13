@@ -157,6 +157,7 @@ const BookPDFButton = ({ getFilteredBooks }) => {
             fontSize: "13px", // Set the font size to smaller
             whiteSpace: "normal", // Allow text to wrap onto two lines
             height: "auto", // Adjust height to fit the content
+            backgroundColor: "#1C7343",
           }}
         >
           Descarca PDF cu
