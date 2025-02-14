@@ -11,6 +11,7 @@ import AvatarLibrary from "../components/AvatarLibrary";
 import AddIcon from "@mui/icons-material/Add";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ResponsiveMenuDrawer = () => {
   const menuItems = [
@@ -21,9 +22,15 @@ const ResponsiveMenuDrawer = () => {
     },
   ];
 
-  const accountMenuItems = [
-    // { text: "My account", icon: AccountBoxIcon, to: "/account" },
-  ];
+  const navigate = useNavigate();
+  const isAdmin = localStorage.getItem("isAdmin") === "true"; // Check if admin is logged in
+
+  // Logout function
+  const handleLogout = () => {
+    localStorage.removeItem("isAdmin"); // Remove admin session
+    navigate("/biblioteca/books"); // Redirect to User page
+    window.location.reload(); // Reload to apply layout change
+  };
 
   return (
     <div>
@@ -51,43 +58,32 @@ const ResponsiveMenuDrawer = () => {
         ))}
       </List>
       <Divider />
-      <List sx={{ padding: 0 }}>
-        {accountMenuItems.map(({ text, icon: ItemIcon, to }) => (
-          <ListItem key={text} disablePadding sx={{ marginBottom: 0 }}>
-            <ListItemButton>
-              <ListItemIcon>
-                <ItemIcon />
-              </ListItemIcon>
-              <Link to={to} style={{ textDecoration: "none" }}>
-                <ListItemText primary={text} />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-
-      <Divider />
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          mt: "16px",
-        }}
-      >
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
         <Link to="/biblioteca.admin/books/create">
           <Button
             variant="contained"
             startIcon={<AddIcon />}
             sx={{
               backgroundColor: "#1C7343",
+              "&:hover": {
+                backgroundColor: "#155e36", // Darker green on hover
+                borderColor: "#155e36", // Darker border color on hover
+              },
             }}
           >
             Adaugare carte noua
           </Button>
         </Link>
       </Box>
-      <Box sx={{ mt: "60px" }}>
+      {/* Show Logout Button Only for Admins */}
+      {isAdmin && (
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+          <Button variant="contained" color="error" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Box>
+      )}
+      <Box sx={{ mt: "60px", textAlign: "center" }}>
         <img
           src="/images/logo.jpg"
           alt="Logo"

@@ -158,6 +158,10 @@ const BookPDFButtonUser = ({ getFilteredBooks }) => {
             whiteSpace: "normal", // Allow text to wrap onto two lines
             height: "auto", // Adjust height to fit the content
             backgroundColor: "#1C7343",
+            "&:hover": {
+              backgroundColor: "#155e36", // Darker green on hover
+              borderColor: "#155e36", // Darker border color on hover
+            },
           }}
         >
           Descarca PDF cu
