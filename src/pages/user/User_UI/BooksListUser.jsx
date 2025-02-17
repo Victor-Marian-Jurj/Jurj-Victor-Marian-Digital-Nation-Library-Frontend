@@ -196,7 +196,7 @@ const BooksListUser = () => {
   return (
     <div>
       <Typography variant="h5" sx={{ color: "#3f51b5" }}>
-        Filtreaza carte
+        Filtrează carte
       </Typography>
       <Container sx={{ backgroundColor: "white", color: "black" }}>
         <TextField
@@ -274,12 +274,12 @@ const BooksListUser = () => {
         {/*  */}
         <div>
           <Typography variant="h5" sx={{ color: "#3f51b5", mb: 2 }}>
-            Cauta carte
+            Caută carte
           </Typography>
           <Container>
             <TextField
               select
-              label="Cauta dupa"
+              label="Caută după"
               value={searchCriteria}
               onChange={(e) => setSearchCriteria(e.target.value)}
               sx={{ width: "100px" }}
@@ -289,7 +289,7 @@ const BooksListUser = () => {
               <MenuItem value="types">Tip carte</MenuItem>
             </TextField>
             <TextField
-              label={`Search by ${searchCriteria}`}
+              // label={`Caută după ${searchCriteria}`}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               sx={{ width: "300px" }}
@@ -316,7 +316,7 @@ const BooksListUser = () => {
             />
           ))
         ) : (
-          <Typography>No books found.</Typography>
+          <Typography>Nu s-au gasit cărți.</Typography>
         )}
       </Stack>
     </div>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Box, TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-// Function to validate year input
 const isValidYear = (year) => {
   return /^[0-9]{4}$/.test(year) && year >= 1800 && year <= 2025;
 };
@@ -15,28 +14,25 @@ const BookForm = ({
   isReadonly,
   onCancelClick,
 }) => {
-  // Input fields state
   const [title, setTitle] = useState(book?.title || "");
   const [authors, setAuthors] = useState(book?.authors || "");
   const [isbn, setIsbn] = useState(book?.isbn || "");
-  const [year, setYear] = useState(book?.year || ""); // Set initial value for year
-  const [types, setGenre] = useState(book?.types || ""); // Set initial value for genre
+  const [year, setYear] = useState(book?.year || "");
+  const [types, setGenre] = useState(book?.types || "");
   const [description, setDescription] = useState(book?.description || "");
 
-  // Validation states
   const [isbnError, setIsbnError] = useState("");
   const [yearError, setYearError] = useState("");
   const [formError, setFormError] = useState(false);
 
   const navigate = useNavigate();
 
-  // ISBN Validation (only digits and hyphens, max 13 characters)
   const handleIsbnChange = (event) => {
-    const value = event.target.value.replace(/[^0-9-]/g, "").slice(0, 13); // Allow only digits and hyphens
+    const value = event.target.value.replace(/[^0-9]/g, "").slice(0, 10);
     setIsbn(value);
 
-    if (value.length !== 20 && value.length > 0) {
-      setIsbnError("ISBN trebuie sa fie 20 de caractere.");
+    if (value.length !== 10 && value.length > 0) {
+      setIsbnError("ISBN trebuie să fie de fix 10 cifre.");
     } else {
       setIsbnError("");
     }
@@ -44,27 +40,24 @@ const BookForm = ({
 
   // Authors Validation (only letters)
   const handleAuthorsChange = (event) => {
-    const value = event.target.value.replace(/[^a-zA-Z ]/g, "").slice(0, 100); // Allow only letters and spaces
+    const value = event.target.value.replace(/[^a-zA-Z ]/g, "").slice(0, 100);
     setAuthors(value);
   };
 
-  // Title Validation (only letters and numbers)
   const handleTitleChange = (event) => {
     const value = event.target.value
       .replace(/[^a-zA-Z0-9 ]/g, "")
-      .slice(0, 100); // Allow only letters, numbers, and spaces
+      .slice(0, 100);
     setTitle(value);
   };
 
-  // Genre Validation (only letters)
   const handleGenreChange = (event) => {
-    const value = event.target.value.replace(/[^a-zA-Z]/g, "").slice(0, 20); // Allow only letters
+    const value = event.target.value.replace(/[^a-zA-Z]/g, "").slice(0, 20);
     setGenre(value);
   };
 
-  // Year Validation (must be a valid 4-digit year)
   const handleYearChange = (event) => {
-    const value = event.target.value.replace(/\D/g, "").slice(0, 4); // Only digits, max 4 characters
+    const value = event.target.value.replace(/\D/g, "").slice(0, 4);
     setYear(value);
 
     if (!isValidYear(value)) {
@@ -74,13 +67,11 @@ const BookForm = ({
     }
   };
 
-  // Description Validation (max length 500 characters)
   const handleDescriptionChange = (event) => {
-    const value = event.target.value.slice(0, 500); // Max length of 500
+    const value = event.target.value.slice(0, 150);
     setDescription(value);
   };
 
-  // Save button click handler
   const handleSaveClick = () => {
     if (
       !isbn ||
@@ -95,12 +86,10 @@ const BookForm = ({
       setFormError(true);
     } else {
       setFormError(false);
-      // Pass all the fields (including year) to the onSaveBook callback
       onSaveBook(isbn, authors, title, types, year, description);
     }
   };
 
-  // Form validity check
   const isFormValid = () =>
     isbn &&
     authors &&
@@ -127,8 +116,6 @@ const BookForm = ({
       }}
     >
       <h1>{formTitle}</h1>
-
-      {/* ISBN Field */}
       <TextField
         variant="outlined"
         disabled={isReadonly}
@@ -137,7 +124,7 @@ const BookForm = ({
         onChange={handleIsbnChange}
         error={!!isbnError}
         helperText={isbnError}
-        inputProps={{ maxLength: 20 }}
+        inputProps={{ maxLength: 10 }}
         fullWidth
         sx={{ width: "100%" }}
       />
@@ -151,7 +138,6 @@ const BookForm = ({
         fullWidth
         sx={{ width: "100%" }}
       />
-      {/* Title Field */}
       <TextField
         variant="outlined"
         disabled={isReadonly}
@@ -162,7 +148,6 @@ const BookForm = ({
         fullWidth
         sx={{ width: "100%" }}
       />
-      {/* Genre Field */}
       <TextField
         variant="outlined"
         disabled={isReadonly}
@@ -173,7 +158,6 @@ const BookForm = ({
         fullWidth
         sx={{ width: "100%" }}
       />
-      {/* Year Field */}
       <TextField
         variant="outlined"
         disabled={isReadonly}
@@ -184,9 +168,8 @@ const BookForm = ({
         helperText={yearError}
         inputProps={{ maxLength: 4 }}
         fullWidth
-        sx={{ width: "100%" }} // Ensures it aligns with other fields
+        sx={{ width: "100%" }}
       />
-      {/* Description Field */}
       <TextField
         variant="outlined"
         disabled={isReadonly}
@@ -197,10 +180,8 @@ const BookForm = ({
         multiline
         rows={4}
         fullWidth
-        sx={{ width: "100%" }} // Ensures it aligns with other fields
+        sx={{ width: "100%" }}
       />
-
-      {/* Error handling for form */}
       {formError && (
         <p
           style={{
@@ -213,8 +194,6 @@ const BookForm = ({
           Va rog sa completati corect toate campurile inainte de salvare.
         </p>
       )}
-
-      {/* Save and Cancel buttons */}
       {!!buttonLabel && (
         <>
           <Button
@@ -222,8 +201,8 @@ const BookForm = ({
             onClick={handleSaveClick}
             disabled={!isFormValid() || isReadonly}
             sx={{
-              width: "40%", // Full width for consistency
-              maxWidth: "200px", // Maximum width as needed
+              width: "40%",
+              maxWidth: "200px",
             }}
           >
             {buttonLabel}
@@ -232,7 +211,7 @@ const BookForm = ({
           <Button
             variant="outlined"
             onClick={handleCancelClick}
-            sx={{ width: "40%", maxWidth: "200px" }} // Full width and maximum width as needed
+            sx={{ width: "40%", maxWidth: "200px" }}
           >
             Cancel
           </Button>
