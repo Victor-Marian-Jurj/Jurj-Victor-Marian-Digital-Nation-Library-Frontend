@@ -67,7 +67,7 @@ const CreateBook = () => {
     >
       <div>
         <BookForm
-          formTitle="Add book"
+          formTitle="Adaugă carte"
           book={book}
           buttonLabel="Add"
           onSaveBook={handleAddBook}

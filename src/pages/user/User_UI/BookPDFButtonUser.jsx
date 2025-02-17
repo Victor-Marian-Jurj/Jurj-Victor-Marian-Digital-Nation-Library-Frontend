@@ -164,9 +164,9 @@ const BookPDFButtonUser = ({ getFilteredBooks }) => {
             },
           }}
         >
-          Descarca PDF cu
+          Descarcă PDF cu
           <br />
-          Cartile filtrate
+          Cărțile filtrate
         </Button>
       </Typography>
     </div>

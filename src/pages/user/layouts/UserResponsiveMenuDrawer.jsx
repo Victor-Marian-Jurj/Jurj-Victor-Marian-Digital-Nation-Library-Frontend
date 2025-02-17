@@ -31,7 +31,7 @@ const LoginBox = styled(Box)({
 const ResponsiveMenuDrawer = () => {
   const menuItems = [
     {
-      text: "Carti disponibile",
+      text: "Cărți disponibile",
       icon: AutoStoriesIcon,
       path: "/biblioteca/books",
     },

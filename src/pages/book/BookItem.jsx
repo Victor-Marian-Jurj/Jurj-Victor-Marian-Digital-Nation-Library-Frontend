@@ -35,13 +35,13 @@ export default function BookItem({ book, onGetBooks }) {
 
     try {
       await deleteBook(bookId);
-      dispatch(openSnackbar({ text: "Carte stearsa cu succes" }));
+      dispatch(openSnackbar({ text: "Carte ștearsă cu succes" }));
       onGetBooks();
     } catch (err) {
       console.error(err);
       dispatch(
         openSnackbar({
-          text: "Eroare in stergerea unei carti",
+          text: "Eroare în stergerea unei cărți",
           severity: "error",
         })
       );

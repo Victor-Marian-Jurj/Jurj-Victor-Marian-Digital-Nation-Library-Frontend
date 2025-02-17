@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const ResponsiveMenuDrawer = () => {
   const menuItems = [
     {
-      text: "Carti disponibile",
+      text: "Cărți disponibile",
       icon: AutoStoriesIcon,
       path: "/biblioteca.admin/books",
     },
@@ -71,7 +71,7 @@ const ResponsiveMenuDrawer = () => {
               },
             }}
           >
-            Adaugare carte noua
+            Adaugă carte
           </Button>
         </Link>
       </Box>
