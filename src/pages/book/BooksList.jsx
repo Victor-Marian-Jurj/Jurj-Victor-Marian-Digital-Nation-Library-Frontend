@@ -271,8 +271,7 @@ const BooksList = () => {
           ))}
         </TextField>
         <BookPDFButton getFilteredBooks={getFilteredBooks} />
-        {/*  */}
-        <div>
+        <div style={{ width: "100%", marginTop: "16px" }}>
           <Typography variant="h5" sx={{ color: "#3f51b5", mb: 2 }}>
             Caută carte
           </Typography>

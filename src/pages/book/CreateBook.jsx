@@ -46,7 +46,7 @@ const CreateBook = () => {
 
     try {
       await postBook(book);
-      dispatch(openSnackbar({ text: "Book added successfully" }));
+      dispatch(openSnackbar({ text: "Carte adăugată cu succes" }));
     } catch (error) {
       console.error(error);
     } finally {
@@ -71,15 +71,7 @@ const CreateBook = () => {
           book={book}
           buttonLabel="Add"
           onSaveBook={handleAddBook}
-          // onClick={handleSaveBook}
         />
-        {/* <Button
-          variant="outlined"
-          onClick={handleCancelClick}
-          sx={{ width: "100px", marginTop: "15px" }}
-        >
-          Cancel
-        </Button> */}
       </div>
     </Box>
   );
