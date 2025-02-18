@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 
-//isOpen, handleClose, onDelete => props
 const ConfirmDeleteBookDialog = ({ book, isOpen, onClose, onDelete }) => {
   const handleDelete = () => {
     onDelete();
@@ -18,7 +17,7 @@ const ConfirmDeleteBookDialog = ({ book, isOpen, onClose, onDelete }) => {
     <Dialog open={isOpen} onClose={onClose}>
       <DialogTitle>Confirmi stergerea?</DialogTitle>
       <DialogContent>
-        <Typography>{`Esti sigur ca vrei sa stergi acesta carte:`}</Typography>
+        <Typography>{`Esti sigur ca vrei sa stergi cartea cu titlul:`}</Typography>
         <Typography sx={{ fontWeight: "bold" }}>{book.title}</Typography>
       </DialogContent>
       <DialogActions>
